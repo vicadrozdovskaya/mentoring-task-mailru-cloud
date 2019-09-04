@@ -1,4 +1,4 @@
-package com.epam.mentoring.mailru.cloud.blocks;
+package com.epam.mentoring.yandex.disk.blocks;
 
 import org.openqa.selenium.WebElement;
 

@@ -1,12 +1,11 @@
-package com.epam.mentoring.mailru.cloud.blocks;
+package com.epam.mentoring.yandex.disk.blocks;
 
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Button extends BaseRow {
 
-    private WebElement label = row().findElement(By.cssSelector(""));
+    private WebElement label;// = row().findElement(By.cssSelector("input"));
 
     public Button (WebElement row) {
         super(row);

@@ -1,4 +1,4 @@
-package com.epam.mentoring.mailru.cloud.pages;
+package com.epam.mentoring.yandex.disk.pages;
 
 import com.epam.mentoring.driver.DriverSingleton;
 import org.openqa.selenium.By;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 
-public class AbstractPage {
+public abstract class AbstractPage {
     private final static int WAIT_FOR_ELEMENT_TIMEOUT_SECONDS = 10;
     protected WebDriver driver;
 
@@ -19,5 +19,9 @@ public class AbstractPage {
 
     protected void waitForElementsVisible (By locator) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+
+    public void waitPageLoad(String url){
+        new WebDriverWait(driver, WAIT_FOR_ELEMENT_TIMEOUT_SECONDS).until(ExpectedConditions.urlContains(url));
     }
 }
