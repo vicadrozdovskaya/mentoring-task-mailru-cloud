@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 public class Button extends BaseRow {
 
-    private WebElement label;// = row().findElement(By.cssSelector("input"));
+    private WebElement label;
 
     public Button (WebElement row) {
         super(row);

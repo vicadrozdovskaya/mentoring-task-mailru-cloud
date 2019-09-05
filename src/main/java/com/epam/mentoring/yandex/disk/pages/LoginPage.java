@@ -5,7 +5,7 @@ import com.epam.mentoring.yandex.disk.blocks.Button;
 import org.openqa.selenium.By;
 
 public class LoginPage extends AbstractPage {
-
+    private final static By ENTER_CLOUD_BUTTON = By.cssSelector("div[class='header__actions aos-init aos-animate']> a[class='button button_login header__login-link']");
     private Button enterCloudButton;
 
 
@@ -13,7 +13,7 @@ public class LoginPage extends AbstractPage {
     }
 
     public LoginPage initBlocks() {
-        enterCloudButton = new Button(DriverSingleton.getDriver().findElement(By.cssSelector("div[class='header__actions aos-init aos-animate']> a[class='button button_login header__login-link']")));
+        enterCloudButton = new Button(DriverSingleton.getDriver().findElement(ENTER_CLOUD_BUTTON));
         return this;
     }
 
