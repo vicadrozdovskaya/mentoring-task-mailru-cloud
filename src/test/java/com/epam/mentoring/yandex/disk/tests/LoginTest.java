@@ -1,4 +1,4 @@
-package com.epam.mentoring.yandex.disk;
+package com.epam.mentoring.yandex.disk.tests;
 
 import com.epam.mentoring.driver.DriverSingleton;
 import com.epam.mentoring.yandex.disk.listener.TestListener;

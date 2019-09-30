@@ -1,12 +1,11 @@
 package com.epam.mentoring.driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
@@ -18,29 +17,29 @@ public class DriverSingleton {
         rb = ResourceBundle.getBundle("driver");
     }
 
-    DriverSingleton() {
+    private DriverSingleton () { }
 
-    }
-
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver () {
         if (null == driver) {
-            System.setProperty(rb.getString("driver.browser"), rb.getString("driver.browser.path"));
-            driver = new ChromeDriver();
-            /*DesiredCapabilities capability = DesiredCapabilities.chrome();
-            try {
-                driver = new RemoteWebDriver(new URL("http://192.168.0.22:4444/wd/hub"), capability);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }*/
+            switch (System.getProperty("browser")) {
+                case "firefox": {
+                    WebDriverManager.firefoxdriver().setup();
+                    driver = new FirefoxDriver();
+                }
+                break;
+                default: {
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                }
+            }
             driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(rb.getString("driver.page.load.timeout")), TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(Integer.parseInt(rb.getString("driver.implicitly.wait")), TimeUnit.SECONDS);
             driver.manage().window().maximize();
         }
-
         return driver;
     }
 
-    public static void closeDriver() {
+    public static void closeDriver () {
         driver.quit();
         driver = null;
     }
