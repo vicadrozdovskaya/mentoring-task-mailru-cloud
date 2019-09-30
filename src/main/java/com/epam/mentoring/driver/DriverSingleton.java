@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverSingleton {
     private static final ResourceBundle rb;
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(()->null);
 
     static {
         rb = ResourceBundle.getBundle("driver");
@@ -20,27 +20,28 @@ public class DriverSingleton {
     private DriverSingleton () { }
 
     public static WebDriver getDriver () {
-        if (null == driver) {
+        if (null == driver.get()) {
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    driver.set(new FirefoxDriver());
                 }
                 break;
                 default: {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driver.set(new ChromeDriver());
                 }
             }
-            driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(rb.getString("driver.page.load.timeout")), TimeUnit.SECONDS);
-            driver.manage().timeouts().implicitlyWait(Integer.parseInt(rb.getString("driver.implicitly.wait")), TimeUnit.SECONDS);
-            driver.manage().window().maximize();
+            driver.get().manage().timeouts().pageLoadTimeout(Integer.parseInt(rb.getString("driver.page.load.timeout")), TimeUnit.SECONDS);
+            driver.get().manage().timeouts().implicitlyWait(Integer.parseInt(rb.getString("driver.implicitly.wait")), TimeUnit.SECONDS);
+            driver.get().manage().window().maximize();
         }
-        return driver;
+        return driver.get();
     }
 
     public static void closeDriver () {
-        driver.quit();
+        driver.get().quit();
+        driver.remove();
         driver = null;
     }
 }

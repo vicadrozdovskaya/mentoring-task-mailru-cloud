@@ -33,4 +33,12 @@ public class FileItem extends BaseElement {
     public FileType getFileType () {
         return fileType;
     }
+
+    public WebElement getIcon () {
+        return icon;
+    }
+
+    public String getTitle () {
+        return title.getText();
+    }
 }

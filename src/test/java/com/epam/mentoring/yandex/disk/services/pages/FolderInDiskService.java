@@ -10,7 +10,7 @@ public class FolderInDiskService implements ChecksFileItem {
 
 
     @Override
-    public FileItem fileItem () {
-        return null;
+    public FileItem getFileItem (String uniqueName) {
+        return folderInDiskPage.getTextFiles().stream().filter(item -> item.getTitle().equals(uniqueName)).findFirst().get();
     }
 }

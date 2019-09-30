@@ -6,13 +6,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public interface ChecksFileItem {
 
-    FileItem fileItem ();
+    FileItem getFileItem (String uniqueName);
 
-    default void checkFileIsVisible () {
-        assertThat("check file is visible", fileItem().self().isDisplayed());
+    default void checkFileIsVisible (String uniqueName) {
+        assertThat("check file is visible", getFileItem(uniqueName).self().isDisplayed());
     }
 
-    default void checkFileItemExists(FileItem fileItem){
-        assertThat("check that folder contains fileItem", fileItem().equals(fileItem));
+    default void checkFileItemExists (FileItem fileItem, String uniqueName) {
+        assertThat("check that folder contains fileItem", getFileItem(uniqueName).equals(fileItem));
     }
 }
