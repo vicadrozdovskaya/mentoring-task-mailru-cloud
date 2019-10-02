@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Folder and files test" verbose="1" parallel="instances" thread-count="2">
+    <test name="UserAccessToLogin"   >
+        <classes>
+            <class name="com.epam.mentoring.yandex.disk.tests.FilesInFolderTest" />
+            <class name="com.epam.mentoring.yandex.disk.tests.DragAndDropFolderTest" />
+        </classes>
+    </test>
+</suite>

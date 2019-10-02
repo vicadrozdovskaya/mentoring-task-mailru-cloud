@@ -1,6 +1,6 @@
 package com.epam.mentoring.yandex.disk.pages;
 
-import com.epam.mentoring.yandex.disk.model.FileItem;
+import com.epam.mentoring.yandex.disk.blocks.FileItem;
 import com.epam.mentoring.yandex.disk.model.FileType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 
 public class FolderInDiskPage extends AbstractPage {
 
-    private final static By FILES_LIST = By.cssSelector("div[class='listing-item listing-item_theme_tile listing-item_size_m listing-item_type_file js-prevent-deselect']");
+    private final static By FILES_LIST = By.cssSelector(
+            "div[class='listing-item listing-item_theme_tile listing-item_size_m listing-item_type_file js-prevent-deselect']");
     private List<FileItem> files = new ArrayList<>();
 
     public FolderInDiskPage initFiles () {
@@ -21,6 +22,10 @@ public class FolderInDiskPage extends AbstractPage {
     }
 
     public List<FileItem> getTextFiles () {
-        return files.stream().filter(file->file.getFileType().equals(FileType.TEXT)).collect(Collectors.toList());
+        return files.stream().filter(file -> file.getFileType().equals(FileType.TEXT)).collect(Collectors.toList());
+    }
+
+    public List<FileItem> getFileItems () {
+        return files;
     }
 }

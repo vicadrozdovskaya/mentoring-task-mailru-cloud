@@ -1,8 +1,7 @@
 package com.epam.mentoring.yandex.disk.tests;
 
 import com.epam.mentoring.yandex.disk.listener.TestListener;
-import com.epam.mentoring.yandex.disk.pages.YandexDiskPage;
-import org.testng.Assert;
+import com.epam.mentoring.yandex.disk.services.pages.YandexDiskService;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -11,16 +10,15 @@ import org.testng.annotations.Test;
 @Listeners (TestListener.class)
 public class DragAndDropFolderTest extends BaseTest {
 
-    YandexDiskPage yandexDiskPage;
+    YandexDiskService yandexDiskService;
 
     @BeforeClass
     public void dragAndDrop () {
-        yandexDiskPage = new YandexDiskPage().initFolders().dragAndDropFolder("Folder1", "Folder2");
+        yandexDiskService = new YandexDiskService().initializeFoldersInDisk().dragAndDropFolder("Folder1", "Folder2");
     }
 
-    @Test (description = "Login to Yandex disk")
-    public void loginYandexDisk () {
-        yandexDiskPage.initFolders();
-        Assert.assertTrue(yandexDiskPage.getNotificationsMessage().contains("Folder1"));
+    @Test (description = "check that drag and drop for folder have done ")
+    public void dragAndDropFolderHaveDone () {
+        yandexDiskService.checkNotificationMessage("Folder1");
     }
 }

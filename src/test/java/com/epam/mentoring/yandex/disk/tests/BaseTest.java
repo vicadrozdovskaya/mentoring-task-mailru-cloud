@@ -1,23 +1,20 @@
 package com.epam.mentoring.yandex.disk.tests;
 
 import com.epam.mentoring.driver.DriverSingleton;
-import com.epam.mentoring.yandex.disk.model.creator.TestDataReader;
-import com.epam.mentoring.yandex.disk.pages.LoginPage;
-import com.epam.mentoring.yandex.disk.pages.YandexLoginPage;
+import com.epam.mentoring.yandex.disk.listener.TestListener;
+import com.epam.mentoring.yandex.disk.model.creator.UserCreator;
+import com.epam.mentoring.yandex.disk.services.pages.LoginStartService;
+import com.epam.mentoring.yandex.disk.services.pages.YandexLoginService;
+import org.apache.log4j.Logger;
+import org.slf4j.ILoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
-
     @BeforeClass (groups = "yandexWithLogin")
     public void signIn () {
-        LoginPage loginPage = new LoginPage().openPage().clickEnterCloudBtn();
-
-        YandexLoginPage yandexLoginPage = new YandexLoginPage().fillEmail(TestDataReader.getTestData("yandex.login")).clickEnterBtn()
-
-                                                               .fillPassword(TestDataReader.getTestData("yandex.password")).clickEnterBtn();
-        yandexLoginPage.waitPageLoad("client/disk");
-
+        new LoginStartService().openPage().clickEnterYandexDisk();
+        new YandexLoginService().loginUser(UserCreator.withCredentialsFromProperty());
     }
 
     @BeforeClass (alwaysRun = true, description = "Start browser")

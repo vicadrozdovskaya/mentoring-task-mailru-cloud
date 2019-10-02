@@ -5,6 +5,7 @@ import com.epam.mentoring.yandex.disk.decorator.CustomFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,11 +18,13 @@ public abstract class AbstractPage {
     public AbstractPage () {
         this.driver = DriverSingleton.getDriver();
         initElements(new CustomFieldDecorator(driver), this);
-        //if (getClass().isAnnotationPresent(PageFactory.class)) initElements(this.driver, this);
     }
 
     protected void waitForElementsVisible (By locator) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_TIMEOUT_SECONDS).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+    protected void waitForElementsVisible (WebElement webElement) {
+        new WebDriverWait(driver, WAIT_FOR_ELEMENT_TIMEOUT_SECONDS).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfAllElements(webElement));
     }
 
     public void waitPageLoad(String url){
