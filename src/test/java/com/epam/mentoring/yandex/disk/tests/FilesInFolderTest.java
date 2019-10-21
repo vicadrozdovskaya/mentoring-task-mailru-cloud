@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class FilesInFolderTest extends BaseTest {
-    private static final String FILE_NAME = "L&D ATM8 - Hometask M10 - Java.docx";
+    private static final String FILE_NAME = "L&D ATM8 - Hometask M10 - Java.doc";
 
     YandexDiskService yandexDiskService;
     FolderInDiskService folderInDiskService;

@@ -6,6 +6,7 @@ import com.epam.mentoring.yandex.disk.pages.YandexDiskPage;
 import com.epam.mentoring.yandex.disk.services.ChecksFolderService;
 import org.openqa.selenium.interactions.Actions;
 
+import static com.epam.mentoring.core.HighlightingElement.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class YandexDiskService implements ChecksFolderService {
@@ -22,24 +23,19 @@ public class YandexDiskService implements ChecksFolderService {
     }
 
     public YandexDiskService clickFolder (String nameFolder) {
-        new Actions(DriverSingleton.getDriver()).doubleClick(
-                yandexDiskPage.getFolders().stream().filter(folder -> folder.getNameFolder().equals(nameFolder)).findFirst().get().self())
-                                                .perform();
+        Folder folder = folder(nameFolder);
+        highlightElement(folder.self());
+        new Actions(DriverSingleton.getDriver()).doubleClick(folder.self()).perform();
         return this;
     }
 
     public YandexDiskService dragAndDropFolder (String nameFolderToDrop, String nameFolderInDrop) {
-        Folder folderToDrop = yandexDiskPage.getFolders()
-                                            .stream()
-                                            .filter(folder -> folder.getNameFolder().equals(nameFolderToDrop))
-                                            .findFirst()
-                                            .get();
-        Folder folderInDrop = yandexDiskPage.getFolders()
-                                            .stream()
-                                            .filter(folder -> folder.getNameFolder().equals(nameFolderInDrop))
-                                            .findFirst()
-                                            .get();
+        Folder folderToDrop = folder(nameFolderToDrop);
+        Folder folderInDrop = folder(nameFolderInDrop);
+        highlightElement(folderToDrop.self());
+        highlightElement(folderInDrop.self());
         new Actions(DriverSingleton.getDriver()).dragAndDrop(folderToDrop.self(), folderInDrop.self()).perform();
+        unHighlightElement(folderInDrop.self());
         return this;
     }
 

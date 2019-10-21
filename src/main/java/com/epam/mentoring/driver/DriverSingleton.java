@@ -1,9 +1,7 @@
 package com.epam.mentoring.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -12,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverSingleton {
     private static final ResourceBundle rb;
-    private static ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(()->null);
+    private static ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(() -> null);
 
     static {
         rb = ResourceBundle.getBundle("driver");
@@ -41,7 +39,7 @@ public class DriverSingleton {
     }
 
     public static void closeDriver () {
-            driver.get().quit();
-            driver.remove();
+        driver.get().quit();
+        driver.remove();
     }
 }

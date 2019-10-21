@@ -1,7 +1,6 @@
 package com.epam.mentoring.yandex.disk.pages;
 
 import com.epam.mentoring.yandex.disk.blocks.Button;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginStartPage extends AbstractPage {

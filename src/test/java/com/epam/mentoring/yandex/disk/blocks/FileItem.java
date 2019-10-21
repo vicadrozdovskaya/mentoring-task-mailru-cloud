@@ -1,11 +1,13 @@
 package com.epam.mentoring.yandex.disk.blocks;
 
 import com.epam.mentoring.yandex.disk.model.FileType;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
+@Getter
 public class FileItem extends BaseElement {
 
     private WebElement icon = self().findElement(
@@ -29,14 +31,6 @@ public class FileItem extends BaseElement {
     public void detectFileType () {
         String type = parseExtension();
         fileType = Arrays.stream(FileType.values()).filter(value -> value.getFileTypeValues().contains(type)).findFirst().get();
-    }
-
-    public FileType getFileType () {
-        return fileType;
-    }
-
-    public WebElement getIcon () {
-        return icon;
     }
 
     public String getTitle () {

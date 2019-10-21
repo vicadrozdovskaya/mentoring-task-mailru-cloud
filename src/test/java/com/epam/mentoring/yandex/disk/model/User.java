@@ -1,7 +1,14 @@
 package com.epam.mentoring.yandex.disk.model;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class User {
     private String userName;
     private String userPassword;
@@ -9,39 +16,5 @@ public class User {
     public User (String userName, String userPassword) {
         this.userName = userName;
         this.userPassword = userPassword;
-    }
-
-    public String getUserName () {
-        return userName;
-    }
-
-    public void setUserName (String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPassword () {
-        return userPassword;
-    }
-
-    public void setUserPassword (String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    @Override
-    public boolean equals (Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userName, user.userName) && Objects.equals(userPassword, user.userPassword);
-    }
-
-    @Override
-    public int hashCode () {
-        return Objects.hash(userName, userPassword);
-    }
-
-    @Override
-    public String toString () {
-        return "User{" + "userName='" + userName + '\'' + ", userPassword='" + userPassword + '\'' + '}';
     }
 }

@@ -1,10 +1,11 @@
 package com.epam.mentoring.yandex.disk.services.pages;
 
 import com.epam.mentoring.driver.DriverSingleton;
-import com.epam.mentoring.yandex.disk.blocks.TextField;
 import com.epam.mentoring.yandex.disk.model.User;
 import com.epam.mentoring.yandex.disk.pages.YandexDiskPage;
 import com.epam.mentoring.yandex.disk.pages.YandexLoginPage;
+
+import static com.epam.mentoring.core.HighlightingElement.highlightElement;
 
 public class YandexLoginService {
 
@@ -14,16 +15,19 @@ public class YandexLoginService {
 
     public YandexLoginService fillEmail (String email) {
         yandexLoginPage.getEmailField().fillText(email);
+        highlightElement(yandexLoginPage.getEmailField().self());
         return this;
     }
 
     public YandexLoginService fillPassword (String password) {
         yandexLoginPage.updatePassField();
         yandexLoginPage.getPassField().fillText(password);
+        highlightElement(yandexLoginPage.getPassField().self());
         return this;
     }
 
     public YandexLoginService clickEnterBtn () {
+        highlightElement(yandexLoginPage.getEnterButton().self());
         yandexLoginPage.getEnterButton().clickButton();
         return this;
     }

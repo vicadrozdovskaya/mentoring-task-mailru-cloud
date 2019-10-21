@@ -1,12 +1,9 @@
 package com.epam.mentoring.yandex.disk.tests;
 
 import com.epam.mentoring.driver.DriverSingleton;
-import com.epam.mentoring.yandex.disk.listener.TestListener;
 import com.epam.mentoring.yandex.disk.model.creator.UserCreator;
 import com.epam.mentoring.yandex.disk.services.pages.LoginStartService;
 import com.epam.mentoring.yandex.disk.services.pages.YandexLoginService;
-import org.apache.log4j.Logger;
-import org.slf4j.ILoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
